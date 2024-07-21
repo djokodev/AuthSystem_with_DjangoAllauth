@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+    <h1>Welcome {% if email %}{{ email }} 🎊{% else %}🫡{% endif %}</h1>
+    <a href="{% url 'logout' %}" type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-dark">Logout</a>
+</body>
+</html>

@@ -1,0 +1,17 @@
+Développement d'un système d'authentification incluant la connexion via Google et GitHub. 
+Le projet utilisera Docker et Docker Compose pour la containerisation et l'Orchestration,
+Celery pour les tâches asynchrones et redis comme broker.
+
+use case :
+
+Préconditions:
+  -L'utilisateur doit avoir un compte Google ou GitHub.
+
+L'utilisateur accède à la page de connexion de l'application où sont présents les boutons de connexion via Google et GitHub. l'utilisateur clique sur le bouton de "connexion avec Google" ou "connexion avec GitHub". L'application redirige l'utilisateur vers la page d'autorisation de Google ou GitHub. L'utilisateur autorise l'application à accéder à ses informations de compte Google ou GitHub. Google/GitHub renvoie un token d'accès à l'application via une redirection. Le backend de l'application reçoit le token d'accès de Google/GitHub.
+L'application utilise ce token pour obtenir les informations de l'utilisateur (par exemple, adresse email, nom).
+Le backend vérifie si l'utilisateur est déjà présent dans la base de données. Si l'utilisateur existe, une session est créée et stockée dans Redis. Si l'utilisateur est nouveau Un nouvel utilisateur est créé dans la base de données avec les informations obtenues via OAuth et Une session est créée et stockée dans Redis.
+L'utilisateur est redirigé vers la page d'accueil de l'application.
+
+
+Stack:
+Django, Postgres, PgAdmin, Redis, Celry
