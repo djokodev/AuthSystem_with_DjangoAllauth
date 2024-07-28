@@ -11,6 +11,9 @@ pyjwt = "*"
 cryptography = "*"
 python-dotenv = "*"
 
+celery = "*"
+redis = "*"
+
 [dev-packages]
 
 [requires]

@@ -24,17 +24,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-z#yaqv&x0n&qju!vk7qe^x0ft0-!3v8mc^1+)4wckq-+o1!pwz'
+SECRET_KEY = (
+    'django-insecure-z#yaqv&x0n&qju!vk7qe^x0ft0-!'
+    '3v8mc^1+)4wckq-+o1!pwz'
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["127.0.0.1", "0.0.0.0"]
 
 SITE_ID = 1
 
-LOGIN_REDIRECT_URL = 'home/' 
-LOGOUT_REDIRECT_URL = '/' 
+LOGIN_REDIRECT_URL = 'home/'
+LOGOUT_REDIRECT_URL = '/'
 
 SOCIALACCOUNT_PROVIDERS = {
     'github': {
@@ -42,8 +45,7 @@ SOCIALACCOUNT_PROVIDERS = {
             'client_id': os.getenv('GITHUB_CLIENT_ID'),
             'secret': os.getenv('GITHUB_SECRET'),
         }
-    },
-   'google': {
+    }, 'google': {
         'APP': {
             'client_id': os.getenv('GOOGLE_CLIENT_ID'),
             'secret': os.getenv('GOOGLE_SECRET'),
@@ -129,16 +131,20 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME': 'django.contrib.auth.password_validation.'
+                'UserAttributeSimilarityValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME': 'django.contrib.auth.password_validation.'
+                'MinimumLengthValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.'
+                'CommonPasswordValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.'
+                'NumericPasswordValidator',
     },
 ]
 
@@ -166,3 +172,7 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = '/'
+
+CELERY_BROKER_URL = os.environ.get("CELERY_BROKER_URL", "redis://redis:6379/0")
+CELERY_RESULT_BACKEND = os.environ.get("CELERY_RESULT_BACKEND",
+                                       "redis://redis:6379/0")

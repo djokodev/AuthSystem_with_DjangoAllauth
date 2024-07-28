@@ -1,0 +1,32 @@
+services:
+  app:
+    build: .
+    container_name: authSystem
+
+    command: pipenv run python manage.py runserver 0.0.0.0:8000
+    ports:
+      - "8081:8000"
+    environment:
+      - DEBUG=1
+      - DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - "6379:6379"
+
+  celery:
+    build: .
+    container_name: celery
+    command: pipenv run celery -A authSystem worker -l info
+    environment:
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+    depends_on:
+      - redis
+      - app
